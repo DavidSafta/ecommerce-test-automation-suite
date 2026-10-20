@@ -58,4 +58,13 @@ public class HomePage {
         return resultsTitle.getText().equalsIgnoreCase("Searched Products")
                 && !searchResults.isEmpty();
     }
+    public void addFirstProductToCart() {
+        $(".features_items .add-to-cart").click();
+        $("#cartModal").shouldBe(visible, Duration.ofSeconds(10));
+    }
+
+    public String getFirstProductName() {
+        return getWebDriver().findElement(
+                org.openqa.selenium.By.cssSelector(".features_items .productinfo p")).getText();
+    }
 }

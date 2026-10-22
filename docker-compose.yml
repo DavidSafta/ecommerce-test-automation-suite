@@ -1,0 +1,14 @@
+services:
+  selenium-chrome:
+    image: selenium/standalone-chrome:latest
+    shm_size: 2gb
+
+  tests:
+    build: .
+    depends_on:
+      - selenium-chrome
+    environment:
+      - SELENIUM_REMOTE_URL=http://selenium-chrome:4444/wd/hub
+      - GITHUB_TOKEN=${GITHUB_TOKEN:-}
+    volumes:
+      - ./allure-results:/app/allure-results
